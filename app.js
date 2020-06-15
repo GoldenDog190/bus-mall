@@ -14,26 +14,31 @@ function Product(imageName, imageSource){
   productCollection.push(this);
 }
 
-new Product('https://github.com/codefellows/seattle-201d64/blob/master/class-11/lab/assets/bag.jpg?raw=true', 'Star Wars Bag');
-new Product('https://github.com/codefellows/seattle-201d64/blob/master/class-11/lab/assets/boots.jpg?raw=true', 'Rain Boots');
-new Product('https://github.com/codefellows/seattle-201d64/blob/master/class-11/lab/assets/pen.jpg?raw=true', 'Multi-Task Pen');
+new Product('images/bag.jpg', 'Star Wars Bag');
+new Product('images/boots.jpg', 'Rain Boots');
+new Product('images/pen.jpg', 'Multi-Task Pen');
 
 //====Event listener====
 var productImageSection = document.getElementById('product-images');
 
-productImageSection.addEventListener('click', handleClickProduct);
+productImageSection.addEventListener('click', productImageSection);
 
 function productImageSection(event){
   if(event.target.tagName === 'IMG'){
     totalClicks++;
 
     if(totalClicks === maxClicks){
-      productImageSection.removeEventListener('click', handleClickProduct);
+      productImageSection.removeEventListener('click', productImageSection);
     }
     //https://stackoverflow.com/questions/14221231/find-relative-path-of-a-image-tag-javascript
-    var targetSrcn = event.target.getAttribute('src');
+    var targetSrc = event.target.getAttribute('src');
     for(var i = 0; i < productCollection.length; i++){
-      if (productCollection[i])
+      if (productCollection[i].imgSrc === targetSrc){
+        productCollection[i].clicked++;
+      }
     } 
   }
 }
+
+
+
