@@ -41,7 +41,7 @@ function productImageSection(event){
   }
 }
 
-//========rerendering images======= 
+//========rerendering images & changing images======= 
 
 function rerenderRandomImg(){
   var firstRandom = pickRandom(0, productCollection.length);
@@ -57,12 +57,12 @@ function rerenderRandomImg(){
 
   } else {
 
-    while(thirdRandom === secondRandom){
+    while(thirdRandom === firstRandom){
       thirdRandom = pickRandom(0, productCollection.length);
       console.log('third new (reroll)', productCollection[thirdRandom]);
     }
   }
-}
+
 
 var leftImage = document.getElementById('left-image');
 var leftName = document.getElementById('left-name');
@@ -73,8 +73,23 @@ var middleName = document.getElementById('middle-name');
 var rightImage = document.getElementById('right-image');
 var rightName = document.getElementById('right-name');
 
+leftImage.src = productCollection[firstRandom].imgSrc;
+leftName.textContent = productCollection[firstRandom].imgName;
+productCollection[firstRandom].prodVote++;
 
-//====random math function
+var secondProduct = productCollection[secondProduct];
+middleImage.src = secondProduct.imgSrc;
+middleName.textContent = secondProduct.imgName;
+secondProduct.shown++;
+
+var thirdProduct = productCollection[thirdProduct];
+rightImage.src = thirdProduct.imgSrc;
+rightName.textContent = thirdProduct.imgName;
+thirdProduct.shown++;
+
+}
+
+//====random math function====
 function pickRandom(min, max){
   return Math.floor(Math.random() * (max - min) + min);
 }
