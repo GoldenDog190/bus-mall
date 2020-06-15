@@ -23,6 +23,7 @@ var productImageSection = document.getElementById('product-images');
 
 productImageSection.addEventListener('click', productImageSection);
 
+//======keeping track of images & tally of number of clicks====
 function productImageSection(event){
   if(event.target.tagName === 'IMG'){
     totalClicks++;
@@ -40,5 +41,40 @@ function productImageSection(event){
   }
 }
 
+//========rerendering images======= 
+
+function rerenderRandomImg(){
+  var firstRandom = pickRandom(0, productCollection.length);
+  console.log('first new', productCollection[firstRandom]);
+
+  var secondRandom = pickRandom(0, productCollection[secondRandom]);
+
+  var thirdRandom = pickRandom(0, productCollection[secondRandom]);
+
+  while(secondRandom === firstRandom){
+    secondRandom = pickRandom(0, productCollection.length);
+    console.log('second new (reroll)', productCollection[secondRandom]);
+
+  } else {
+
+    while(thirdRandom === secondRandom){
+      thirdRandom = pickRandom(0, productCollection.length);
+      console.log('third new (reroll)', productCollection[thirdRandom]);
+    }
+  }
+}
+
+var leftImage = document.getElementById('left-image');
+var leftName = document.getElementById('left-name');
+
+var middleImage = document.getElementById('middle-image');
+var middleName = document.getElementById('middle-name');
+
+var rightImage = document.getElementById('right-image');
+var rightName = document.getElementById('right-name');
 
 
+//====random math function
+function pickRandom(min, max){
+  return Math.floor(Math.random() * (max - min) + min);
+}
