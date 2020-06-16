@@ -10,6 +10,7 @@ function Product(imageSource, imageName){
   this.imgSrc = imageSource;
   this.clicked = 0;
   this.prodVote = 0;
+  this.percent = percentCal;
 
   productCollection.push(this);
 }
@@ -42,6 +43,18 @@ function clickHandler(event){
   rerenderRandomImg();
 }
 
+//======percentage of times item was clicked======
+
+Product.prototype.calculatePercent = function(){
+  var calculation = parseFloat(this.clicked/this.prodVote);
+  var percentCaculate = Math.round(calculation*100);
+  this.percent = percentCaculate;
+};
+
+for(var i = 0; i < productCollection.length; i++){
+  productCollection[i], calculatePercent();
+  
+}
 //========rerendering images & changing images======= 
 
 function rerenderRandomImg(){
@@ -92,7 +105,26 @@ thirdProduct.prodVote++;
 }
 
 //=======list==========
+//======JavaScript & JQuery by Jon Duckett pp.240
+//====adding items to sart and end of list====
+var list = document.getElementsByTagName('ul')[0];
 
+//====add new item to end of list===
+var newItemLast = document.createElement('li');
+var newTextLast = document.createTextNode('multi-task pen');
+newItemLast.appendChild(newTextLast);
+list.appendChild(newItemLast);
+
+//====add new item start of list===
+var newItemFirst = document.createElement('li');
+var newTextFirst = document.createTextNode('Star Wars bag');
+newItemFirst.appendChild(newTextFirst);
+list.insertBefore(newItemFirst, list.firstChild);
+
+var newItemSecond = document.createElement('li');
+var newTextSecond = document.createTextNode('Rain Boots');
+newItemSecond.appendChild(newTextSecond);
+list.insertBefore(newItemSecond, list.firstChild);
 
 //====random math function====
 function pickRandom(min, max){
