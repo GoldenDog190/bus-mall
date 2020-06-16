@@ -1,0 +1,28 @@
+ header {
+ font-size: 40px;
+ }
+ 
+ div > img {
+  float: left;
+  width: 33%;
+}
+
+section:first-of-type {
+  position: relative;
+  overflow: hidden;
+}
+
+section:first-of-type > p {
+  font-size: 20px;
+  margin: 0 30px;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translateY(-50%);
+}
+
+.productList {
+  text-align: center;
+  margin: 30px auto;
+  margin-top: 200px;
+}
