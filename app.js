@@ -91,6 +91,9 @@ thirdProduct.prodVote++;
 
 }
 
+//=======list==========
+var text = ''
+
 //====random math function====
 function pickRandom(min, max){
   return Math.floor(Math.random() * (max - min) + min);
