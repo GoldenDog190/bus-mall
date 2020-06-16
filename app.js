@@ -19,6 +19,12 @@ function Product(imageSource, imageName){
 new Product('images/bag.jpg', 'Star Wars Bag');
 new Product('images/boots.jpg', 'Rain Boots');
 new Product('images/pen.jpg', 'Multi-Task Pen');
+new Product('images/banana.jpg', 'Banana Slicer');
+new Product('images/breakfast.jpg', 'Multi-Breakfast');
+new Product('images/chair.jpg', 'Red Chair');
+new Product('images/dog-duck.jpg', 'Dog Duck Face Mask');
+new Product('images/pet-sweep.jpg', 'Pet Sweep');
+new Product('images/scissors.jpg', 'Pizza Scissors');
 
 //====Event listener====
 var productImageSection = document.getElementById('product-images');
@@ -78,7 +84,7 @@ function rerenderRandomImg(){
     
   }
 
-console.log(firstRandom, secondRandom, thirdRandom);
+//console.log(firstRandom, secondRandom, thirdRandom);
 
 var leftImage = document.getElementById('left-image');
 var leftName = document.getElementById('left-name');
