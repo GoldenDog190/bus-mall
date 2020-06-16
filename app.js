@@ -5,7 +5,7 @@ var productCollection = [];
 var totalClicks = 0;
 var maxClicks = 25;
 //======constructor function=====
-function Product(imageName, imageSource){
+function Product(imageSource, imageName){
   this.imgName = imageName;
   this.imgSrc = imageSource;
   this.clicked = 0;
@@ -21,10 +21,10 @@ new Product('images/pen.jpg', 'Multi-Task Pen');
 //====Event listener====
 var productImageSection = document.getElementById('product-images');
 
-productImageSection.addEventListener('click', productImageSection);
+productImageSection.addEventListener('click',  clickHandler);
 
 //======keeping track of images & tally of number of clicks====
-function productImageSection(event){
+function clickHandler(event){
   if(event.target.tagName === 'IMG'){
     totalClicks++;
 
@@ -39,6 +39,7 @@ function productImageSection(event){
       }
     } 
   }
+  rerenderRandomImg();
 }
 
 //========rerendering images & changing images======= 
@@ -47,22 +48,23 @@ function rerenderRandomImg(){
   var firstRandom = pickRandom(0, productCollection.length);
   console.log('first new', productCollection[firstRandom]);
 
-  var secondRandom = pickRandom(0, productCollection[secondRandom]);
+  var secondRandom = pickRandom(0, productCollection.length);
 
-  var thirdRandom = pickRandom(0, productCollection[secondRandom]);
+  var thirdRandom = pickRandom(0, productCollection.length);
 
   while(secondRandom === firstRandom){
     secondRandom = pickRandom(0, productCollection.length);
     console.log('second new (reroll)', productCollection[secondRandom]);
 
-  } else {
-
-    while(thirdRandom === firstRandom){
-      thirdRandom = pickRandom(0, productCollection.length);
-      console.log('third new (reroll)', productCollection[thirdRandom]);
-    }
   }
 
+    while(thirdRandom === firstRandom || thirdRandom === secondRandom){
+      thirdRandom = pickRandom(0, productCollection.length);
+      console.log('third new (reroll)', productCollection[thirdRandom]);
+    
+  }
+
+console.log(firstRandom, secondRandom, thirdRandom);
 
 var leftImage = document.getElementById('left-image');
 var leftName = document.getElementById('left-name');
@@ -77,15 +79,15 @@ leftImage.src = productCollection[firstRandom].imgSrc;
 leftName.textContent = productCollection[firstRandom].imgName;
 productCollection[firstRandom].prodVote++;
 
-var secondProduct = productCollection[secondProduct];
+var secondProduct = productCollection[secondRandom];
 middleImage.src = secondProduct.imgSrc;
 middleName.textContent = secondProduct.imgName;
-secondProduct.shown++;
+secondProduct.prodVote++;
 
-var thirdProduct = productCollection[thirdProduct];
+var thirdProduct = productCollection[thirdRandom];
 rightImage.src = thirdProduct.imgSrc;
 rightName.textContent = thirdProduct.imgName;
-thirdProduct.shown++;
+thirdProduct.prodVote++;
 
 }
 
