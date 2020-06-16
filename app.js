@@ -4,6 +4,7 @@
 var productCollection = [];
 var totalClicks = 0;
 var maxClicks = 25;
+
 //======constructor function=====
 function Product(imageSource, imageName){
   this.imgName = imageName;
@@ -53,7 +54,7 @@ Product.prototype.calculatePercent = function(){
 
 for(var i = 0; i < productCollection.length; i++){
   productCollection[i], calculatePercent();
-  
+
 }
 //========rerendering images & changing images======= 
 
