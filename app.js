@@ -92,7 +92,7 @@ thirdProduct.prodVote++;
 }
 
 //=======list==========
-var text = ''
+
 
 //====random math function====
 function pickRandom(min, max){

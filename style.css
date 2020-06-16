@@ -1,10 +1,37 @@
+ body {
+   color: aliceblue;
+   background-color: rgb(33, 33, 177);
+ }
+ 
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Arial;
+  margin-bottom: 40px;
+}
+
  header {
  font-size: 40px;
+ font-weight: bold;
+ font-family: Georgia;
+ margin-bottom: 15px;
  }
  
  div > img {
   float: left;
   width: 33%;
+}
+
+.starbag {
+  margin-left: auto;
+}
+
+.rboots {
+ margin-left: auto;
+}
+
+.multipen {
+  margin-left: auto;
 }
 
 section:first-of-type {
@@ -13,16 +40,20 @@ section:first-of-type {
 }
 
 section:first-of-type > p {
-  font-size: 20px;
+  float:left;
+  font-size: 25px;
   margin: 0 30px;
   position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translateY(-50%);
 }
 
 .productList {
+  font-size: 20px;
   text-align: center;
   margin: 30px auto;
-  margin-top: 200px;
+  margin-top: 50px;
+}
+
+ul {
+ font-family: sans-serif;
+ font-size: 18px;
 }
