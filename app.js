@@ -38,6 +38,15 @@ new Product('images/usb.gif', 'Octopus USB');
 new Product('images/water-can.jpg', 'Water Can');
 new Product('images/wine-glass.jpg', 'Wine Glass');
 
+//=======retrieve storage====
+var stringyCollectionFromStorage = localStorage.getItem('storedCollection');
+var collectionFromStorage = JSON.parse(stringyCollectionFromStorage);
+console.log('products from storage', collectionFromStorage);
+
+if(collectionFromStorage){
+  Product.collection = collectionFromStorage;
+}
+
 //====Event listener====
 var productImageSection = document.getElementById('product-images');
 
@@ -56,6 +65,12 @@ function clickHandler(event){
 
       renderTheChart();
     }
+   //===save to local storage======
+   var stringyCollection = JSON.stringify(Product.collection);
+   console.log('stringy array', stringyCollection);
+
+   localStorage.setItem('storedCollection', stringyCollection);
+
     //https://stackoverflow.com/questions/14221231/find-relative-path-of-a-image-tag-javascript
     var targetSrc = event.target.getAttribute('src');
     for(var i = 0; i < Product.collection.length; i++){
