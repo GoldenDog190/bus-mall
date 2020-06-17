@@ -3,6 +3,8 @@ body {
  }
  
   header {
+  border-style: dotted;
+  border-color: blue;
   color: rgb(43, 230, 230);
   font-size: 50px;
   font-weight: bold;
