@@ -1,7 +1,6 @@
 'use strict';
 
 //===global variables===
-//var Product.collection = [];
 var totalClicks = 0;
 var maxClicks = 25;
 
@@ -10,7 +9,7 @@ function Product(imageSource, imageName){
   this.imgName = imageName;
   this.imgSrc = imageSource;
   this.clicked = 0;
-  this.prodVote = 0;
+  this.shown = 0;
   this.percent = 0;
 
   Product.collection.push(this);
@@ -44,13 +43,17 @@ var productImageSection = document.getElementById('product-images');
 
 productImageSection.addEventListener('click',  clickHandler);
 
+
 //======keeping track of images & tally of number of clicks====
 function clickHandler(event){
   if(event.target.tagName === 'IMG'){
     totalClicks++;
-
+    
     if(totalClicks === maxClicks){
       productImageSection.removeEventListener('click', productImageSection);
+    //=======erasing images to show chart====
+      productImageSection.innerHTML ='';
+
       renderTheChart();
     }
     //https://stackoverflow.com/questions/14221231/find-relative-path-of-a-image-tag-javascript
@@ -68,8 +71,8 @@ function clickHandler(event){
 //======percentage of times item was clicked======
 
 Product.prototype.calculatePercent = function(){
-  if(this.prodVote !== 0){
-  var calculation = parseFloat(this.clicked/this.prodVote);
+  if(this.shown !== 0){
+  var calculation = parseFloat(this.clicked/this.shown);
   var percentCaculate = Math.round(calculation*100);
   this.percent = percentCaculate;
 };
@@ -111,6 +114,7 @@ function rerenderRandomImg(){
   randomImagesIndexes = [firstRandom, secondRandom, thirdRandom];
 
 
+
 var leftImage = document.getElementById('left-image');
 var leftName = document.getElementById('left-name');
 
@@ -122,17 +126,17 @@ var rightName = document.getElementById('right-name');
 
 leftImage.src = Product.collection[firstRandom].imgSrc;
 leftName.textContent = Product.collection[firstRandom].imgName;
-Product.collection[firstRandom].prodVote++;
+Product.collection[firstRandom].shown++;
 
 var secondProduct = Product.collection[secondRandom];
 middleImage.src = secondProduct.imgSrc;
 middleName.textContent = secondProduct.imgName;
-secondProduct.prodVote++;
+secondProduct.shown++;
 
 var thirdProduct = Product.collection[thirdRandom];
 rightImage.src = thirdProduct.imgSrc;
 rightName.textContent = thirdProduct.imgName;
-thirdProduct.prodVote++;
+thirdProduct.shown++;
 
 }
 
@@ -159,13 +163,14 @@ for(i = 0; i < Product.collection.length; i++){
 for(i = 0; i < Product.collection.length; i++){
   imageClick.push(Product.collection[i].clicked);
 }
-//====replace data of percenatge of clicks
+//====replace data of percenatge of clicks====
 for(i = 0; i < Product.collection.length; i++){
   Product.collection[i].calculatePercent();
     imagePercent.push(Product.collection[i].percent);
   }
   
   //======chart=========
+  //===https://www.chartjs.org/docs/latest/charts/mixed.html ========
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
@@ -221,8 +226,9 @@ for(i = 0; i < Product.collection.length; i++){
           borderWidth: 1
       }, 
     {
-      label: 'Line Dataset',
+      label: '% of items viewed',
             data: imagePercent,
+            borderColor: 'rgba(25, 159, 64, 1)',
             type: 'line'
     }]
     }, 

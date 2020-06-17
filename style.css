@@ -1,25 +1,47 @@
- body {
-   color: aliceblue;
-   background-color: rgb(33, 33, 177);
+body {
+  color: aliceblue;
+  background-color: rgb(33, 33, 177);
  }
+ 
+  header {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: Georgia;
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: 30px;
+  }
  
 h2 {
   font-size: 30px;
   font-weight: bold;
   font-family: Arial;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
- header {
- font-size: 40px;
- font-weight: bold;
- font-family: Georgia;
- margin-bottom: 15px;
+h3 {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Arial;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.pleaseclick {
+  text-align: center;
+}
+
+ div {
+   float: left;
+   width: 33%;
+   box-sizing: border-box;
+   margin-bottom: 10px;
  }
- 
- div > img {
+
+img {
   float: left;
-  width: 33%;
+  width: 100%;
 }
 
 .starbag {
