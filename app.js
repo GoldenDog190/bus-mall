@@ -23,8 +23,8 @@ var stringyCollectionFromStorage = localStorage.getItem('storedCollection');
 var collectionFromStorage = JSON.parse(stringyCollectionFromStorage);
 console.log('products from storage', collectionFromStorage);
 
+//=========passing data backthrough the constructor for storage====
 if(collectionFromStorage){
-  //Product.collection = collectionFromStorage;
   
   for(var i in collectionFromStorage){
     var thisProduct = collectionFromStorage[i];
@@ -35,8 +35,6 @@ if(collectionFromStorage){
     var shown = thisProduct.shown;
     
     new Product(imgSrc, imgName, clicked, shown, percent);
-    
-    
   }
   
 } else {
@@ -207,7 +205,7 @@ for(i = 0; i < Product.collection.length; i++){
     data: {
       labels: imageLabels,
       datasets: [{
-        label: '# of Clicks',
+        label: 'Number of Clicks',
         data: imageClick,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -253,12 +251,15 @@ for(i = 0; i < Product.collection.length; i++){
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          fontSize: 20
       }, 
     {
-      label: '% of items viewed',
+      label: 'Percentage of Items Viewed',
             data: imagePercent,
             borderColor: 'rgba(25, 159, 64, 1)',
+            fontSize: 20,
+            fontColor:'rgba(25, 159, 64, 1)',
             type: 'line'
     }]
     }, 
