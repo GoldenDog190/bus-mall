@@ -5,38 +5,60 @@ var totalClicks = 0;
 var maxClicks = 25;
 
 //======constructor function=====
-function Product(imageSource, imageName){
+function Product(imageSource, imageName, clicked = 0, shown = 0, percent = 0){
   this.imgName = imageName;
   this.imgSrc = imageSource;
-  this.clicked = 0;
-  this.shown = 0;
-  this.percent = 0;
+  this.clicked = clicked;
+  this.shown = shown;
+  this.percent = percent;
 
   Product.collection.push(this);
 }
 
 Product.collection = [];
 
-new Product('images/bag.jpg', 'Star Wars Bag');
-new Product('images/boots.jpg', 'Rain Boots');
-new Product('images/pen.jpg', 'Multi-Task Pen');
-new Product('images/banana.jpg', 'Banana Slicer');
-new Product('images/breakfast.jpg', 'Multi-Breakfast');
-new Product('images/chair.jpg', 'Red Chair');
-new Product('images/dog-duck.jpg', 'Dog Duck Face Mask');
-new Product('images/pet-sweep.jpg', 'Pet Sweep');
-new Product('images/scissors.jpg', 'Pizza Scissors');
-new Product('images/bathroom.jpg', 'Special Toliet Paper Holder');
-new Product('images/bubblegum.jpg', 'Bubble Gum');
-new Product('images/cthulhu.jpg', 'Cthulhu');
-new Product('images/dragon.jpg', 'Canned Dragon Meat');
-new Product('images/shark.jpg', 'Shark Sleeping Bag');
-new Product('images/sweep.png', 'Baby Sweep');
-new Product('images/tauntaun.jpg', 'Tautaun');
-new Product('images/unicorn.jpg', 'Unicorn');
-new Product('images/usb.gif', 'Octopus USB');
-new Product('images/water-can.jpg', 'Water Can');
-new Product('images/wine-glass.jpg', 'Wine Glass');
+
+//=======retrieve storage====
+var stringyCollectionFromStorage = localStorage.getItem('storedCollection');
+var collectionFromStorage = JSON.parse(stringyCollectionFromStorage);
+console.log('products from storage', collectionFromStorage);
+
+//=========passing data backthrough the constructor for storage====
+if(collectionFromStorage){
+  
+  for(var i in collectionFromStorage){
+    var thisProduct = collectionFromStorage[i];
+    var clicked = thisProduct.clicked;
+    var imgName = thisProduct.imgName;
+    var imgSrc = thisProduct.imgSrc;
+    var percent = thisProduct.percent;
+    var shown = thisProduct.shown;
+    
+    new Product(imgSrc, imgName, clicked, shown, percent);
+  }
+  
+} else {
+  new Product('images/bag.jpg', 'Star Wars Bag');
+  new Product('images/boots.jpg', 'Rain Boots');
+  new Product('images/pen.jpg', 'Multi-Task Pen');
+  new Product('images/banana.jpg', 'Banana Slicer');
+  new Product('images/breakfast.jpg', 'Multi-Breakfast');
+  new Product('images/chair.jpg', 'Red Chair');
+  new Product('images/dog-duck.jpg', 'Dog Duck Face Mask');
+  new Product('images/pet-sweep.jpg', 'Pet Sweep');
+  new Product('images/scissors.jpg', 'Pizza Scissors');
+  new Product('images/bathroom.jpg', 'Special Toliet Paper Holder');
+  new Product('images/bubblegum.jpg', 'Bubble Gum');
+  new Product('images/cthulhu.jpg', 'Cthulhu');
+  new Product('images/dragon.jpg', 'Canned Dragon Meat');
+  new Product('images/shark.jpg', 'Shark Sleeping Bag');
+  new Product('images/sweep.png', 'Baby Sweep');
+  new Product('images/tauntaun.jpg', 'Tautaun');
+  new Product('images/unicorn.jpg', 'Unicorn');
+  new Product('images/usb.gif', 'Octopus USB');
+  new Product('images/water-can.jpg', 'Water Can');
+  new Product('images/wine-glass.jpg', 'Wine Glass');
+}
 
 //====Event listener====
 var productImageSection = document.getElementById('product-images');
@@ -56,6 +78,12 @@ function clickHandler(event){
 
       renderTheChart();
     }
+   //===save to local storage======
+   var stringyCollection = JSON.stringify(Product.collection);
+   console.log('stringy array', stringyCollection);
+
+   localStorage.setItem('storedCollection', stringyCollection);
+
     //https://stackoverflow.com/questions/14221231/find-relative-path-of-a-image-tag-javascript
     var targetSrc = event.target.getAttribute('src');
     for(var i = 0; i < Product.collection.length; i++){
@@ -177,7 +205,7 @@ for(i = 0; i < Product.collection.length; i++){
     data: {
       labels: imageLabels,
       datasets: [{
-        label: '# of Clicks',
+        label: 'Number of Clicks',
         data: imageClick,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -223,12 +251,15 @@ for(i = 0; i < Product.collection.length; i++){
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          fontSize: 20
       }, 
     {
-      label: '% of items viewed',
+      label: 'Percentage of Items Viewed',
             data: imagePercent,
             borderColor: 'rgba(25, 159, 64, 1)',
+            fontSize: 20,
+            fontColor:'rgba(25, 159, 64, 1)',
             type: 'line'
     }]
     }, 
